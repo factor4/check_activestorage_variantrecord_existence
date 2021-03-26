@@ -18,7 +18,7 @@
   </p>
 
   <p>
-    <strong>Invalid avatar variant redirect URL (chaned one character in :variation_key):</strong><br>
+    <strong>Invalid avatar variant redirect URL (or change one character in :variation_key):</strong><br>
     <%= text_field_tag :working, "http://localhost:3000#{url_for(@user.avatar.variant(resize_to_fit: [100, 100], variation_key: 'notexistend'))}", style: "width: 100%", readonly: true %><b>
     Response: HTTP/1.1 500 Internal Server Error
   </p>
