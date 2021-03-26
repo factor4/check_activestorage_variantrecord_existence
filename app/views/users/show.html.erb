@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<% if @user.avatar.attached? %>
+  <p>
+    <strong>Avatar:</strong>
+    <%= image_tag @user.avatar.variant(resize_to_fit: [100, 100]), alt: '' %>
+  </p>
+
+  <p>
+    <strong>Working avatar variant redirect URL:</strong><br>
+    <%= text_field_tag :working, "http://localhost:3000#{url_for(@user.avatar.variant(resize_to_fit: [100, 100]))}", style: "width: 100%", readonly: true %><b>
+    Response: HTTP/1.1 302 Found
+  </p>
+
+  <p>
+    <strong>Invalid avatar variant redirect URL (chaned one character in :variation_key):</strong><br>
+    <%= text_field_tag :working, "http://localhost:3000#{url_for(@user.avatar.variant(resize_to_fit: [100, 100], variation_key: 'notexistend'))}", style: "width: 100%", readonly: true %><b>
+    Response: HTTP/1.1 500 Internal Server Error
+  </p>
+
+  <p><strong>Check out branch fix/activesupport_messageverifier_invalidsignature to see my fix in action</strong></p>
+<% end %>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
